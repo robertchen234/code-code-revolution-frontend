@@ -16,9 +16,9 @@ Inspired by
 [[https://github.com/daschwa/typing-test][Adam Schwartz]] and  [[http://10fastfingers.com/typing-test/english][10fastfingers]].
 
 * Screenshots
-[[file:/screenshots/test.png]]
-[[file:/screenshots/results.png]]
-[[file:/screenshots/leaderboard.png]]
+[[file:/public/screenshots/test.png]]
+[[file:/public/screenshots/results.png]]
+[[file:/public/screenshots/leaderboard.png]]
 * Developing
 Execute
 #+BEGIN_SRC sh
