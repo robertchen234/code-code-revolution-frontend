@@ -1,7 +1,7 @@
 {
-  "name": "Hello, Blockstack",
+  "name": "Code Code Revolution",
   "start_url": "localhost:5000",
-  "description": "A simple demo of Blockstack Auth",
+  "description": "How fast can you code?",
   "icons": [{
     "src": "https://helloblockstack.com/icon-192x192.png",
     "sizes": "192x192",

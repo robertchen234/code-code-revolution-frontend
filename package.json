@@ -1,7 +1,7 @@
 {
-  "name": "hello-blockstack",
+  "name": "code-code-revolution",
   "version": "0.0.0",
-  "description": "A simple Blockstack app",
+  "description": "How fast can you code?",
   "main": "index.js",
   "scripts": {
     "browserify": "browserify requires.js -o public/bundle.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blockstack/hello-blockstack.git"
+    "url": "git+https://github.com/robertchen234/code-code-revolution-frontend.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/blockstack/hello-blockstack/issues"
+    "url": "https://github.com/robertchen234/code-code-revolution-frontend/issues"
   },
-  "homepage": "https://github.com/blockstack/hello-blockstack#readme",
+  "homepage": "https://github.com/robertchen234/code-code-revolution-frontend#readme",
   "devDependencies": {
     "browserify": "^14.1.0",
     "express": "^4.15.2",
