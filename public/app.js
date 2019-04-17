@@ -983,6 +983,7 @@ function sortScores(scores) {
   scoresArray.sort(function(a, b) {
     return a.score - b.score;
   });
+  
   //   let distinctScoresArray = [...new Set(scoresArray.map(score => score.user_id))]
 
   showLeaderBoard();
