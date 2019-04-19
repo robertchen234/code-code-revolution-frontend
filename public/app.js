@@ -12,6 +12,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
       blockstack.signUserOut(window.location.href);
     });
 
+  getUsersInterval();
+
+  function getUsersInterval() {
+    let users = [];
+    const interval = setInterval(() => {
+      users.length < 1
+        ? fetch(
+            "https://code-code-revolution-backend.herokuapp.com/api/v1/users"
+          )
+            .then(res => res.json())
+            .then(data => (users = data))
+        : clearInterval(interval);
+    }, 3000);
+
+    return users.length < 1 ? interval : clearInterval(interval);
+  }
+
   function showProfile(profile) {
     var person = new blockstack.Person(profile);
     document.getElementById("heading-name").innerHTML = person.name()
@@ -981,13 +998,23 @@ function sortScores(scores) {
   });
 
   scoresArray.sort(function(a, b) {
-    return a.score - b.score;
+    return b.score - a.score;
   });
-  
-  //   let distinctScoresArray = [...new Set(scoresArray.map(score => score.user_id))]
+
+  //   let scoresArrayDistinct = [...new Set(scoresArray.map(score => score.user_id))]
+
+  let idObj = {};
+  let scoresArrayDistinct = [];
+
+  for (let score of scoresArray) {
+    if (!idObj[score.user_id]) {
+      idObj[score.user_id] = score;
+      scoresArrayDistinct.push(score);
+    }
+  }
 
   showLeaderBoard();
-  showScores(scoresArray);
+  showScores(scoresArrayDistinct);
 }
 
 function showLeaderBoard() {
@@ -1007,10 +1034,10 @@ function showLeaderBoard() {
   getComments();
 }
 
-function showScores(scoresArray) {
+function showScores(scoresArrayDistinct) {
   let leaderBoard = document.querySelector("#leaderboard");
-  let i = scoresArray.length;
-  scoresArray.forEach(score => {
+  let i = scoresArrayDistinct.length;
+  scoresArrayDistinct.forEach(score => {
     const tr = document.createElement("TR");
     tr.innerHTML = `<td class="count">${i--}.</td>
       <td class="name">${score.user.name}</td>
