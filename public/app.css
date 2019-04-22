@@ -347,6 +347,7 @@ footer {
   text-align: center;
   font-size: 0.8em;
   color: #fff;
+  padding-bottom: 3em;
 }
 
 footer a {
@@ -551,4 +552,9 @@ footer a:hover {
 .share:hover {
   color: #00a4e4;
   border: 1px solid #00a4e4;
+  text-decoration: none;
+}
+
+.twitter {
+  margin-left: 2em;
 }
