@@ -191,6 +191,7 @@ section {
 
 #type-section {
   text-align: center;
+  margin-bottom: 3em;
 }
 #type-section > * {
   font-size: 1.5em;
@@ -538,4 +539,16 @@ footer a:hover {
 
 .landing-words {
   margin: auto;
+}
+
+.share {
+  font-size: 1em;
+  border: 1px solid white;
+  border-radius: 2em;
+  padding: 1em;
+}
+
+.share:hover {
+  color: #00a4e4;
+  border: 1px solid #00a4e4;
 }
