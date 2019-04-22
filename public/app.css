@@ -520,9 +520,20 @@ footer a:hover {
   left: 0em;
   width: 100vw;
   height: 100vh;
-  background-color: #2f4f4f;
   color: white;
   display: flex;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: #2f4f4f;
+  background-repeat: no-repeat;
+  background: -webkit-linear-gradient(to left top, blue, red);
+  background: -moz-linear-gradient(to left top, blue, red);
+  background: -ms-linear-gradient(to left top, blue, red);
+  background: -o-linear-gradient(to left top, blue, red);
+  background: linear-gradient(to left top, blue, red);
 }
 
 .landing-words {
