@@ -411,11 +411,13 @@ footer a:hover {
 }
 
 .delete-button {
+  color: black;
   margin-right: 5px;
   padding: 2px;
 }
 
 .edit-button {
+  color: black;
   margin-left: 5px;
   padding: 2px;
 }
