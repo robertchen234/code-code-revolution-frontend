@@ -1009,7 +1009,7 @@ function sortScores(scores) {
   for (let score of scoresArray) {
     if (!idObj[score.user_id]) {
       idObj[score.user_id] = score;
-      scoresArrayDistinct.push(score);
+      scoresArrayDistinct.unshift(score);
     }
   }
 
