@@ -243,12 +243,12 @@ section {
 
 #submit-name {
   font-size: 1em;
+  padding: 0em 1em 0em 1em;
   display: inline-block;
   border-radius: 0.25em;
   border: none;
   color: #fff;
   vertical-align: middle;
-  width: 4em;
   background-color: #00a4e4;
   margin-right: 0;
 }
