@@ -68,7 +68,7 @@ if (navigator.userAgent.match(/firefox/i)) {
 
 /////////////////////////////////////////
 
-// Sorted list of the 500 common programming words.
+// List of common programming words.
 let wordList = [
   "if",
   "else",
@@ -569,7 +569,23 @@ let wordList = [
   "unless",
   "reject",
   "accept",
-  "helper"
+  "helper",
+  "create-react-app",
+  "react-router-dom",
+  "componentDidMount()",
+  "componentWillMount()",
+  "componentDidUpdate()",
+  "render()",
+  "react-redux",
+  "mapStateToProps",
+  "mapDispatchToProps",
+  "bindActionCreators",
+  "withRouter",
+  "export default",
+  "React.Fragment",
+  "this.state",
+  "this.props",
+  "this.setState({})", "JSX", "Components", "Containers", "onClick={}"
 ];
 
 //////////////////////////////////////////
@@ -1579,5 +1595,3 @@ function updateListSelection() {
 //   //
 //   loop();
 // })();
-
-
