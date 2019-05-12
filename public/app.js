@@ -585,7 +585,12 @@ let wordList = [
   "React.Fragment",
   "this.state",
   "this.props",
-  "this.setState({})", "JSX", "Components", "Containers", "onClick={}"
+  "this.setState({})",
+  "JSX",
+  "Components",
+  "Containers",
+  "onClick={}",
+  "localStorage.getItem()"
 ];
 
 //////////////////////////////////////////
