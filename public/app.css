@@ -225,11 +225,12 @@ section {
   border-radius: 0.25em;
   border: none;
   vertical-align: middle;
-  width: 100%;
+  width: 90%;
   color: #000;
   padding: 0.5em;
   box-shadow: -1px -1px 5px #383838;
 }
+
 #namebox:focus,
 #commentbox:focus,
 #editcommentbox:focus {

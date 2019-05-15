@@ -938,11 +938,15 @@ var showSubmitName = (function() {
       let typeSection = document.querySelector("#type-section");
       let typeBox = document.querySelector("#typebox");
       let timer = document.querySelector("#timer");
+      let comboSpan = document.querySelector(".combo-combo");
+      let comboMaxSpan = document.querySelector(".combo-max");
       let nameForm = document.createElement("FORM");
 
       // hide previous input box and timer
       typeBox.style.display = "none";
       timer.style.display = "none";
+      comboSpan.style.display = "none";
+      comboMaxSpan.style.display = "none";
 
       // show input name form with submit
       const person = blockstack.loadUserData().username;
@@ -1199,7 +1203,6 @@ function postComment(e) {
       content: content
     })
   })
-    .then(console.log("posted to comments database"))
     .then(data => data.json())
     .then(comment => appendCommentWithButtons(comment))
     .then(document.querySelector("#commentform").reset());
@@ -1243,7 +1246,6 @@ function deleteComment(e) {
     }
   )
     .then(e.target.parentNode.remove())
-    .then(console.log("deleted from comments database"))
     .then(toggleToPostCommentForm());
 }
 
@@ -1296,7 +1298,6 @@ function updateComment(e) {
       })
     }
   )
-    .then(console.log("patched to comments database"))
     .then(data => data.json())
     .then(comment => {
       changeCommentInDom(comment);
