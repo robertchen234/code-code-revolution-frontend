@@ -659,6 +659,23 @@ let wordData = {
   typed: 0
 };
 
+function grow() {
+  let comboH2 = document.querySelector(".combo-combo");
+  comboH2.className = "combo-combo grow";
+}
+
+function growMax() {
+  let comboMaxH2 = document.querySelector(".combo-max");
+  comboMaxH2.className = "combo-max grow";
+}
+
+function shrink() {
+  let comboH2 = document.querySelector(".combo-combo");
+  let comboMaxH2 = document.querySelector(".combo-max");
+  comboH2.className = "combo-combo";
+  comboMaxH2.className = "combo-max";
+}
+
 //////////////////////////////////////////
 // Initial implementation notes:
 // next word on <space>, if empty, then set value=""
@@ -669,16 +686,31 @@ let wordData = {
 //////////////////////////////////////////
 
 function checkWord(word) {
+  let comboSpan = document.querySelector(".combo-count");
+  let comboCount = parseInt(comboSpan.innerText);
+  let comboMaxSpan = document.querySelector(".combo-max-count");
+  let comboMaxCount = parseInt(comboMaxSpan.innerText);
   let wlen = word.value.length;
   // how much we have of the current word.
   let current = $(".current-word")[0];
   let currentSubstring = current.innerHTML.substring(0, wlen);
   // check if we have any typing errors
+
   if (word.value.trim() != currentSubstring) {
     current.classList.add("incorrect-word-bg");
+    comboCount = 0;
+    comboSpan.innerText = comboCount;
+    shrink();
     return false;
   } else {
     current.classList.remove("incorrect-word-bg");
+    comboCount += 1;
+    comboSpan.innerText = comboCount;
+    grow();
+    if (comboCount > comboMaxCount) {
+      comboMaxSpan.innerText = comboCount;
+      growMax();
+    }
     return true;
   }
 }
@@ -726,18 +758,29 @@ function clearLine() {
 function isTimer(seconds) {
   // BUG: page refresh with keyboard triggers onkeyup and starts timer
   // Use restart button to reset timer
-
+  let run = 0;
   let time = seconds;
   // only set timer once
   let one = $("#timer > span")[0].innerHTML;
   if (one == "1:00") {
     let typingTimer = setInterval(() => {
+      run = 0;
       if (time <= 0) {
         clearInterval(typingTimer);
       } else {
         time -= 1;
         let timePad = time < 10 ? "0" + time : time; // zero padded
+        let timeRemaining = $("#timer > span")[0];
         $("#timer > span")[0].innerHTML = `0:${timePad}`;
+
+        if (timeRemaining.innerHTML.slice(2, 4) <= 10 && run === 0) {
+          console.log(timeRemaining.innerHTML.slice(2, 4));
+          timeRemaining.className = "growTimer";
+          setTimeout(function() {
+            timeRemaining.className = "shrink";
+          }, 500);
+          run += 1;
+        }
       }
     }, 1000);
   } else if (one == "0:00") {
@@ -788,18 +831,19 @@ var calculateWPM = (function(data) {
       } else {
         wpmClass.add("incorrect-word-c");
       }
-
-      console.log(wordData);
     }
   };
 })();
 
 function calculateWPM(data) {
+  let comboMaxSpan = document.querySelector(".combo-max-count");
+  let comboMaxCount = parseInt(comboMaxSpan.innerText);
   let { seconds, correct, incorrect, total, typed } = data;
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
-  let score = wpm * accuracy * 100;
+  let bonus = comboMaxCount * 10;
+  let score = wpm * accuracy * 100 + bonus;
   let scoreComma = score.toLocaleString("en");
 
   if (wpm < 0) {
@@ -831,8 +875,6 @@ function calculateWPM(data) {
   } else {
     wpmClass.add("incorrect-word-c");
   }
-
-  console.log(wordData);
 }
 
 function typingTest(e) {
@@ -959,8 +1001,7 @@ function postUser() {
     })
   })
     .then(data => data.json())
-    .then(user => postScore(user))
-    .then(console.log("posted to users database"));
+    .then(user => postScore(user));
 }
 
 function postScore(user) {
@@ -1000,16 +1041,13 @@ function postScore(user) {
       incorrect_words: incorrect_words,
       characters_typed: characters_typed
     })
-  })
-    .then(console.log("posted to scores database"))
-    .then(getScores);
+  }).then(getScores);
 }
 
 function getScores() {
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/scores")
     .then(data => data.json())
-    .then(scores => sortScores(scores))
-    .then(console.log("got new scores from database"));
+    .then(scores => sortScores(scores));
 }
 
 function sortScores(scores) {
