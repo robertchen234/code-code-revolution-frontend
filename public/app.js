@@ -662,11 +662,19 @@ let wordData = {
 function grow() {
   let comboH2 = document.querySelector(".combo-combo");
   comboH2.className = "combo-combo grow";
+
+  setTimeout(function() {
+    comboH2.className = "combo-combo";
+  }, 500);
 }
 
 function growMax() {
   let comboMaxH2 = document.querySelector(".combo-max");
   comboMaxH2.className = "combo-max grow";
+
+  setTimeout(function() {
+    comboMaxH2.className = "combo-max";
+  }, 500);
 }
 
 function shrink() {

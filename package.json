@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "blockstack": "^18.0.4",
+    "csshake": "^1.5.3",
     "yarn": "^1.15.2"
   }
 }
