@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             .then(res => res.json())
             .then(data => (users = data))
         : clearInterval(interval);
-    }, 3000);
+    }, 2000);
 
     return users.length < 1 ? interval : clearInterval(interval);
   }
