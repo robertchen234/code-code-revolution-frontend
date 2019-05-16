@@ -1083,10 +1083,12 @@ function showLeaderBoard() {
   const typeSection = document.querySelector("#type-section");
   const wordSection = document.querySelector("#word-section");
   const nameForm = document.querySelector("#nameform");
+  const comboMaxSpan = document.querySelector(".combo-max");
 
   ccr.innerText = "Leaderboard";
   wordSection.style.display = "none";
   nameForm.style.display = "none";
+  comboMaxSpan.style.display = "none";
 
   let leaderBoard = document.createElement("TABLE");
   leaderBoard.id = "leaderboard";
