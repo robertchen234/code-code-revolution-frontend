@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   document
-    .getElementById("signin-button")
+    .getElementById("signup-button")
     .addEventListener("click", function(event) {
       event.preventDefault();
       blockstack.redirectToSignIn();
@@ -738,11 +738,14 @@ function submitWord(word) {
     current.classList.add("incorrect-word-c");
     wordData.incorrect += 1;
   }
+  
   // update wordData
   wordData.total = wordData.correct + wordData.incorrect;
 
   // make the next word the new current-word.
   current.nextSibling.classList.add("current-word");
+
+  calculateWPM(wordData);
 }
 
 function clearLine() {
@@ -764,15 +767,13 @@ function clearLine() {
 }
 
 function isTimer(seconds) {
-  // BUG: page refresh with keyboard triggers onkeyup and starts timer
-  // Use restart button to reset timer
-  let run = 0;
+  let run = false;
   let time = seconds;
   // only set timer once
   let one = $("#timer > span")[0].innerHTML;
   if (one == "1:00") {
     let typingTimer = setInterval(() => {
-      run = 0;
+      run = false;
       if (time <= 0) {
         clearInterval(typingTimer);
       } else {
@@ -781,13 +782,13 @@ function isTimer(seconds) {
         let timeRemaining = $("#timer > span")[0];
         $("#timer > span")[0].innerHTML = `0:${timePad}`;
 
-        if (timeRemaining.innerHTML.slice(2, 4) <= 10 && run === 0) {
-          console.log(timeRemaining.innerHTML.slice(2, 4));
+        if (timeRemaining.innerHTML.slice(2, 4) <= 10 && run === false) {
+          
           timeRemaining.className = "growTimer";
           setTimeout(function() {
             timeRemaining.className = "shrink";
           }, 500);
-          run += 1;
+          run = true;
         }
       }
     }, 1000);
@@ -797,18 +798,21 @@ function isTimer(seconds) {
   return true;
 }
 
-var calculateWPM = (function(data) {
+var displayWPM = (function(data) {
   var executed = false;
   return function(data) {
     if (!executed) {
       executed = true;
 
-      let { seconds, correct, incorrect, total, typed } = data;
-      let min = seconds / 60;
-      let wpm = Math.ceil(typed / 5 - incorrect / min);
-      let accuracy = Math.ceil((correct / total) * 100);
-      let score = wpm * accuracy * 100;
-      let scoreComma = score.toLocaleString("en");
+      let comboMaxSpan = document.querySelector(".combo-max-count");
+  let comboMaxCount = parseInt(comboMaxSpan.innerText);
+  let { seconds, correct, incorrect, total, typed } = data;
+  let min = seconds / 60;
+  let wpm = Math.ceil(typed / 5 - incorrect / min);
+  let accuracy = Math.ceil((correct / total) * 100);
+  let bonus = comboMaxCount * 10;
+  let score = wpm * accuracy * 100 + bonus;
+  let scoreComma = score.toLocaleString("en");
 
       if (wpm < 0) {
         wpm = 0;
@@ -871,18 +875,6 @@ function calculateWPM(data) {
         </ul>`;
 
   $("#ccr")[0].innerText = `Score: ${scoreComma}`;
-  $("#word-section")[0].innerHTML = results;
-
-  // start fetch
-  showSubmitName();
-
-  // color code accuracy
-  let wpmClass = $("li:nth-child(2) .wpm-value")[0].classList;
-  if (accuracy > 80) {
-    wpmClass.add("correct-word-c");
-  } else {
-    wpmClass.add("incorrect-word-c");
-  }
 }
 
 function typingTest(e) {
@@ -915,7 +907,7 @@ function typingTest(e) {
       wordData.typed += 1; // count each valid character typed
     } else {
       // Display typing test results.
-      calculateWPM(wordData);
+      displayWPM(wordData);
     }
   }
 }

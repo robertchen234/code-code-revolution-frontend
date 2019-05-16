@@ -15,6 +15,10 @@ LiveReload]].
 Inspired by
 [[https://github.com/daschwa/typing-test][Adam Schwartz]] and  [[http://10fastfingers.com/typing-test/english][10fastfingers]].
 
+Logo designed by 
+[[https://github.com/StephanieHou][Stephanie Hou]]
+[[file:/public/favicon.ico]]
+
 * Screenshots
 [[file:/public/screenshots/test.png]]
 [[file:/public/screenshots/results.png]]
