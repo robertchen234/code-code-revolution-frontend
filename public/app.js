@@ -684,6 +684,36 @@ function shrink() {
   comboMaxH2.className = "combo-max";
 }
 
+function powerUp() {
+  const powers = ["freeze", "shield", "+10%", "+10sec", "+10,000"];
+  let index = Math.floor(Math.random() * 5);
+  let power = powers[index];
+
+  const powersDiv = document.querySelector(".powers");
+  let powersSpan = powersDiv.querySelectorAll("SPAN");
+
+  let powerExists = false;
+
+  powersSpan.forEach(span => {
+    if (span.className === power) {
+      powerExists = true;
+    }
+  });
+
+  if (powerExists === false) {
+    let powerSpan = document.createElement("SPAN");
+    powerSpan.className = power;
+    powerSpan.innerText = power;
+
+    powersDiv.append(powerSpan);
+  }
+}
+
+function powerDown() {
+  const powersDiv = document.querySelector(".powers");
+  powersDiv.innerHTML = ""
+}
+
 //////////////////////////////////////////
 // Initial implementation notes:
 // next word on <space>, if empty, then set value=""
@@ -709,6 +739,7 @@ function checkWord(word) {
     comboCount = 0;
     comboSpan.innerText = comboCount;
     shrink();
+    powerDown()
     return false;
   } else {
     current.classList.remove("incorrect-word-bg");
@@ -718,6 +749,9 @@ function checkWord(word) {
     if (comboCount > comboMaxCount) {
       comboMaxSpan.innerText = comboCount;
       growMax();
+    }
+    if (comboCount % 10 === 0) {
+      powerUp();
     }
     return true;
   }
@@ -738,13 +772,14 @@ function submitWord(word) {
     current.classList.add("incorrect-word-c");
     wordData.incorrect += 1;
   }
-  
+
   // update wordData
   wordData.total = wordData.correct + wordData.incorrect;
 
   // make the next word the new current-word.
   current.nextSibling.classList.add("current-word");
 
+  // change score on screen
   calculateWPM(wordData);
 }
 
@@ -783,7 +818,6 @@ function isTimer(seconds) {
         $("#timer > span")[0].innerHTML = `0:${timePad}`;
 
         if (timeRemaining.innerHTML.slice(2, 4) <= 10 && run === false) {
-          
           timeRemaining.className = "growTimer";
           setTimeout(function() {
             timeRemaining.className = "shrink";
@@ -798,13 +832,8 @@ function isTimer(seconds) {
   return true;
 }
 
-var displayWPM = (function(data) {
-  var executed = false;
-  return function(data) {
-    if (!executed) {
-      executed = true;
-
-      let comboMaxSpan = document.querySelector(".combo-max-count");
+function calculateWPM(data) {
+  let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
   let { seconds, correct, incorrect, total, typed } = data;
   let min = seconds / 60;
@@ -813,6 +842,41 @@ var displayWPM = (function(data) {
   let bonus = comboMaxCount * 10;
   let score = wpm * accuracy * 100 + bonus;
   let scoreComma = score.toLocaleString("en");
+
+  if (wpm < 0) {
+    wpm = 0;
+  } // prevent negative wpm from incorrect words
+
+  // template strings are pretty cool
+  let results = `<ul id="results">
+        <li>WPM: <span class="wpm-value">${wpm}</span></li>
+        <li>Accuracy: <span class="wpm-value">${accuracy}%</span></li>
+        <li id="results-stats">
+        Total Words: <span>${total}</span> |
+        Correct Words: <span>${correct}</span> |
+        Incorrect Words: <span>${incorrect}</span> |
+        Characters Typed: <span>${typed}</span>
+        </li>
+        </ul>`;
+
+  $("#ccr")[0].innerText = `Score: ${scoreComma}`;
+}
+
+var displayWPM = (function(data) {
+  var executed = false;
+  return function(data) {
+    if (!executed) {
+      executed = true;
+
+      let comboMaxSpan = document.querySelector(".combo-max-count");
+      let comboMaxCount = parseInt(comboMaxSpan.innerText);
+      let { seconds, correct, incorrect, total, typed } = data;
+      let min = seconds / 60;
+      let wpm = Math.ceil(typed / 5 - incorrect / min);
+      let accuracy = Math.ceil((correct / total) * 100);
+      let bonus = comboMaxCount * 10;
+      let score = wpm * accuracy * 100 + bonus;
+      let scoreComma = score.toLocaleString("en");
 
       if (wpm < 0) {
         wpm = 0;
@@ -846,36 +910,6 @@ var displayWPM = (function(data) {
     }
   };
 })();
-
-function calculateWPM(data) {
-  let comboMaxSpan = document.querySelector(".combo-max-count");
-  let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  let { seconds, correct, incorrect, total, typed } = data;
-  let min = seconds / 60;
-  let wpm = Math.ceil(typed / 5 - incorrect / min);
-  let accuracy = Math.ceil((correct / total) * 100);
-  let bonus = comboMaxCount * 10;
-  let score = wpm * accuracy * 100 + bonus;
-  let scoreComma = score.toLocaleString("en");
-
-  if (wpm < 0) {
-    wpm = 0;
-  } // prevent negative wpm from incorrect words
-
-  // template strings are pretty cool
-  let results = `<ul id="results">
-        <li>WPM: <span class="wpm-value">${wpm}</span></li>
-        <li>Accuracy: <span class="wpm-value">${accuracy}%</span></li>
-        <li id="results-stats">
-        Total Words: <span>${total}</span> |
-        Correct Words: <span>${correct}</span> |
-        Incorrect Words: <span>${incorrect}</span> |
-        Characters Typed: <span>${typed}</span>
-        </li>
-        </ul>`;
-
-  $("#ccr")[0].innerText = `Score: ${scoreComma}`;
-}
 
 function typingTest(e) {
   // Char:        Key Code:
