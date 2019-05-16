@@ -656,7 +656,8 @@ let wordData = {
   correct: 0,
   incorrect: 0,
   total: 0,
-  typed: 0
+  typed: 0,
+  powerPoints: 0
 };
 
 function grow() {
@@ -703,15 +704,54 @@ function powerUp() {
   if (powerExists === false) {
     let powerSpan = document.createElement("SPAN");
     powerSpan.className = power;
-    powerSpan.innerText = power;
+    powerSpan.innerText = power; // replace innerText with innerHTML and use an image
 
     powersDiv.append(powerSpan);
+
+    if (power === "freeze") {
+      freeze();
+    } else if (power === "shield") {
+      shield();
+    } else if (power === "+10%") {
+      plusTenPercent();
+    } else if (power === "+10sec") {
+      plusTenSeconds();
+    } else if (power === "+10,000") {
+      plusTenThousand();
+    }
   }
+}
+
+function freeze() {
+  console.log("freeze");
+}
+
+function shield() {
+  console.log("shield");
+}
+
+function plusTenPercent() {
+  console.log("plusTenPercent");
+}
+
+function plusTenSeconds() {
+  console.log("plusTenSeconds");
+}
+
+function plusTenThousand() {
+  wordData.powerPoints += 10000
+
+  let powersDiv = document.querySelector(".powers");
+  const plusTenThousandSpan = document.getElementsByClassName("+10,000")[0];
+
+  setTimeout(function() {
+    powersDiv.removeChild(plusTenThousandSpan);
+  }, 5000);
 }
 
 function powerDown() {
   const powersDiv = document.querySelector(".powers");
-  powersDiv.innerHTML = ""
+  powersDiv.innerHTML = "";
 }
 
 //////////////////////////////////////////
@@ -739,7 +779,7 @@ function checkWord(word) {
     comboCount = 0;
     comboSpan.innerText = comboCount;
     shrink();
-    powerDown()
+    powerDown();
     return false;
   } else {
     current.classList.remove("incorrect-word-bg");
@@ -751,6 +791,7 @@ function checkWord(word) {
       growMax();
     }
     if (comboCount % 10 === 0) {
+      // change to mod 100
       powerUp();
     }
     return true;
@@ -835,12 +876,12 @@ function isTimer(seconds) {
 function calculateWPM(data) {
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  let { seconds, correct, incorrect, total, typed } = data;
+  let { seconds, correct, incorrect, total, typed, powerPoints } = data;
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
   let bonus = comboMaxCount * 10;
-  let score = wpm * accuracy * 100 + bonus;
+  let score = wpm * accuracy * 100 + powerPoints + bonus;
   let scoreComma = score.toLocaleString("en");
 
   if (wpm < 0) {
@@ -870,12 +911,12 @@ var displayWPM = (function(data) {
 
       let comboMaxSpan = document.querySelector(".combo-max-count");
       let comboMaxCount = parseInt(comboMaxSpan.innerText);
-      let { seconds, correct, incorrect, total, typed } = data;
+      let { seconds, correct, incorrect, total, typed, powerPoints } = data;
       let min = seconds / 60;
       let wpm = Math.ceil(typed / 5 - incorrect / min);
       let accuracy = Math.ceil((correct / total) * 100);
       let bonus = comboMaxCount * 10;
-      let score = wpm * accuracy * 100 + bonus;
+      let score = wpm * accuracy * 100 + powerPoints + bonus;
       let scoreComma = score.toLocaleString("en");
 
       if (wpm < 0) {
