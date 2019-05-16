@@ -931,14 +931,12 @@ var showSubmitName = (function() {
       let typeBox = document.querySelector("#typebox");
       let timer = document.querySelector("#timer");
       let comboSpan = document.querySelector(".combo-combo");
-      let comboMaxSpan = document.querySelector(".combo-max");
       let nameForm = document.createElement("FORM");
 
       // hide previous input box and timer
       typeBox.style.display = "none";
       timer.style.display = "none";
       comboSpan.style.display = "none";
-      comboMaxSpan.style.display = "none";
 
       // show input name form with submit
       const person = blockstack.loadUserData().username;
