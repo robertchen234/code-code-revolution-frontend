@@ -736,6 +736,7 @@ function freeze() {
 }
 
 function shield() {
+  wordData.shield = true
 }
 
 function plusFivePercent() {
@@ -794,7 +795,7 @@ function checkWord(word) {
   let currentSubstring = current.innerHTML.substring(0, wlen);
   // check if we have any typing errors
 
-  if (word.value.trim() != currentSubstring) {
+  if (word.value.trim() != currentSubstring && wordData.shield === false) {
     current.classList.add("incorrect-word-bg");
     comboCount = 0;
     comboSpan.innerText = comboCount;
@@ -802,6 +803,10 @@ function checkWord(word) {
     powerDown();
     return false;
   } else {
+    if (word.value.trim() != currentSubstring && wordData.shield) {
+      wordData.shield = false
+    }
+    
     current.classList.remove("incorrect-word-bg");
     comboCount += 1;
     comboSpan.innerText = comboCount;
