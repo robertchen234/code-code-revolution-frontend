@@ -657,12 +657,13 @@ let wordData = {
   incorrect: 0,
   total: 0,
   typed: 0,
-  freeze: false,
-  shield: false,
+  freeze: false, // when this is true, stop the timer
+  freezeTime: 0, // need to add this to seconds
+  shield: false, // when this is true, can block one typo
   powerPercentActive: false, // when this is true
   powerPercentPoints: 0, // add 5% of score to here
   powerTime: false, // plus10sec glitching
-  powerPoints: 0
+  powerPoints: 0 // this adds 10,000 points
 };
 
 function grow() {
@@ -737,6 +738,7 @@ function powerUp() {
 }
 
 function freeze() {
+  let powersDiv = document.querySelector(".powers")
   const freezeSpan = document.querySelector(".freeze")
   wordData.freeze = true
 
@@ -760,15 +762,22 @@ function plusFivePercent() {
 }
 
 function plusTenSeconds() {
-  wordData.seconds += 10
   wordData.powerTime = true
 
   let powersDiv = document.querySelector(".powers");
   const plusTenSecondsSpan = document.getElementsByClassName("plus10sec")[0];
 
   setTimeout(function() {
+    plusTenThousandSpan.className = "plus10sec fadeout"
+  }, 4000)
+
+  setTimeout(function() {
     powersDiv.removeChild(plusTenSecondsSpan);
   }, 5000);
+
+  setTimeout(function() {
+    wordData.powerTime = false;
+  }, 10000);
 }
 
 function plusTenThousand() {
@@ -776,6 +785,10 @@ function plusTenThousand() {
 
   let powersDiv = document.querySelector(".powers");
   const plusTenThousandSpan = document.getElementsByClassName("plus10000")[0];
+
+  setTimeout(function() {
+    plusTenThousandSpan.className = "plus10000 fadeout"
+  }, 4000)
 
   setTimeout(function() {
     powersDiv.removeChild(plusTenThousandSpan);
@@ -842,7 +855,7 @@ function checkWord(word) {
       comboMaxSpan.innerText = comboCount;
       growMax();
     }
-    if (comboCount % 1 === 0) {
+    if (comboCount % 2 === 0) {
       powerUp();
     }
     return true;
@@ -907,8 +920,9 @@ function isTimer(seconds) {
         clearInterval(typingTimer);
       } else {
 
-        if (wordData.freeze) {
+        if (wordData.freeze || wordData.powerTime) {
           time -= 0
+          wordData.freezeTime += 1
         } else {
           time -= 1;
         }
@@ -935,7 +949,8 @@ function isTimer(seconds) {
 function calculateWPM(data) {
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  let { seconds, correct, incorrect, total, typed, powerPercentActive, powerPercentPoints, powerPoints } = data;
+  let { seconds, correct, incorrect, total, typed, freezeTime, powerPercentActive, powerPercentPoints, powerPoints } = data;
+  seconds += freezeTime
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
@@ -974,12 +989,13 @@ var displayWPM = (function(data) {
 
       let comboMaxSpan = document.querySelector(".combo-max-count");
       let comboMaxCount = parseInt(comboMaxSpan.innerText);
-      let { seconds, correct, incorrect, total, typed, powerPoints } = data;
+      let { seconds, correct, incorrect, total, typed, freezeTime, powerPercentPoints, powerPoints } = data;
+      seconds += freezeTime;
       let min = seconds / 60;
       let wpm = Math.ceil(typed / 5 - incorrect / min);
       let accuracy = Math.ceil((correct / total) * 100);
       let bonus = comboMaxCount * 10;
-      let score = wpm * accuracy * 100 + powerPoints + bonus;
+      let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
       let scoreComma = score.toLocaleString("en");
 
       if (wpm < 0) {
@@ -1069,12 +1085,14 @@ var showSubmitName = (function() {
       let typeBox = document.querySelector("#typebox");
       let timer = document.querySelector("#timer");
       let comboSpan = document.querySelector(".combo-combo");
+      let powers = document.querySelector(".powers")
       let nameForm = document.createElement("FORM");
 
       // hide previous input box and timer
       typeBox.style.display = "none";
       timer.style.display = "none";
       comboSpan.style.display = "none";
+      powers.style.display = "none";
 
       // show input name form with submit
       const person = blockstack.loadUserData().username;

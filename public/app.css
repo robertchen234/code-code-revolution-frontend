@@ -690,7 +690,7 @@ footer a:hover {
 }
 
 .powers span img {
-  width: 50px;
+  width: 60px;
 }
 
 .powers span {
@@ -732,13 +732,117 @@ footer a:hover {
   }
 }
 
+/* .freeze {
+  border-radius: 50%;
+  -webkit-animation: neonWhite 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonWhite 1.5s ease-in-out infinite alternate;
+  animation: neonWhite 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neonWhite {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px white, 0 0 70px white,
+      0 0 80px white, 0 0 100px white,
+      0 0 150px white;
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px white, 0 0 35px white,
+      0 0 40px white, 0 0 50px white,
+      0 0 75px white;
+  }
+}
+
+@-moz-keyframes neonWhite {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px white, 0 0 70px white,
+      0 0 80px white, 0 0 100px white,
+      0 0 150px white;
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px white, 0 0 35px white,
+      0 0 40px white, 0 0 50px white,
+      0 0 75px white;
+  }
+}
+
+@keyframes neonWhite {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px white, 0 0 70px white,
+      0 0 80px white, 0 0 100px white,
+      0 0 150px white;
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px white, 0 0 35px white,
+      0 0 40px white, 0 0 50px white,
+      0 0 75px white;
+  }
+}
+
+.shield {
+  border-radius: 50%;
+  -webkit-animation: neonTeal 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonTeal 1.5s ease-in-out infinite alternate;
+  animation: neonTeal 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neonTeal {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
+      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
+      0 0 150px rgb(25, 254, 193);
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
+      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
+      0 0 75px rgb(25, 254, 193);
+  }
+}
+
+@-moz-keyframes neonTeal {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
+      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
+      0 0 150px rgb(25, 254, 193);
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
+      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
+      0 0 75px rgb(25, 254, 193);
+  }
+}
+
+@keyframes neonTeal {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
+      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
+      0 0 150px rgb(25, 254, 193);
+  }
+  to {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
+      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
+      0 0 75px rgb(25, 254, 193);
+  }
+} */
+
 .plus5percent {
-  -webkit-animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
-  -moz-animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
-  animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
+  -webkit-animation: neonRed 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonRed 1.5s ease-in-out infinite alternate;
+  animation: neonRed 1.5s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes neonPlus5Percent {
+@-webkit-keyframes neonRed {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
@@ -753,7 +857,7 @@ footer a:hover {
   }
 }
 
-@-moz-keyframes neonPlus5Percent {
+@-moz-keyframes neonRed {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
@@ -768,7 +872,7 @@ footer a:hover {
   }
 }
 
-@keyframes neonPlus5Percent {
+@keyframes neonRed {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
@@ -784,12 +888,12 @@ footer a:hover {
 }
 
 .plus10sec {
-  -webkit-animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
-  -moz-animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
-  animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
+  -webkit-animation: neonYellow 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonYellow 1.5s ease-in-out infinite alternate;
+  animation: neonYellow 1.5s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes neonPlus10Sec {
+@-webkit-keyframes neonYellow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
@@ -804,7 +908,7 @@ footer a:hover {
   }
 }
 
-@-moz-keyframes neonPlus10Sec {
+@-moz-keyframes neonYellow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
@@ -819,7 +923,7 @@ footer a:hover {
   }
 }
 
-@keyframes neonPlus10Sec {
+@keyframes neonYellow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
@@ -835,12 +939,12 @@ footer a:hover {
 }
 
 .plus10000 {
-  -webkit-animation: neonPlus10000 1.5s ease-in-out infinite alternate;
-  -moz-animation: neonPlus10000 1.5s ease-in-out infinite alternate;
-  animation: neonPlus10000 1.5s ease-in-out infinite alternate;
+  -webkit-animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
+  animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes neonPlus10000 {
+@-webkit-keyframes neonSkyBlue {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
@@ -855,7 +959,7 @@ footer a:hover {
   }
 }
 
-@-moz-keyframes neonPlus10000 {
+@-moz-keyframes neonSkyBlue {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
@@ -870,7 +974,7 @@ footer a:hover {
   }
 }
 
-@keyframes neonPlus10000 {
+@keyframes neonSkyBlue {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
       0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
@@ -883,4 +987,44 @@ footer a:hover {
       0 0 40px rgba(25, 181, 254, 1), 0 0 50px rgba(25, 181, 254, 1),
       0 0 75px rgba(25, 181, 254, 1);
   }
+}
+
+/* .fadein.freeze {
+  animation: fadeInBottom 1s, neonWhite 1.5s ease-in-out infinite alternate
+}
+
+.fadein.shield {
+  animation: fadeInBottom 1s, neonTeal 1.5s ease-in-out infinite alternate
+} */
+
+.fadein.plus5percent {
+  animation: fadeInBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
+}
+
+.fadein.plus10sec {
+  animation: fadeInBottom 1s, neonYellow 1.5s ease-in-out infinite alternate;
+}
+
+.fadein.plus10000 {
+  animation: fadeInBottom 1s, neonSkyBlue 1.5s ease-in-out infinite alternate;
+}
+
+/* .fadeout.freeze {
+  animation: fadeOutBottom 1s, neonWhite 1.5s ease-in-out infinite alternate
+}
+
+.fadeout.shield {
+  animation: fadeOutBottom 1s, neonTeal 1.5s ease-in-out infinite alternate
+} */
+
+.fadeout.plus5percent {
+  animation: fadeOutBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
+}
+
+.fadeout.plus10sec {
+  animation: fadeOutBottom 1s, neonYellow 1.5s ease-in-out infinite alternate;
+}
+
+.fadeout.plus10000 {
+  animation: fadeOutBottom 1s, neonSkyBlue 1.5s ease-in-out infinite alternate;
 }
