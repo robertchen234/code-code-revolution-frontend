@@ -657,6 +657,8 @@ let wordData = {
   incorrect: 0,
   total: 0,
   typed: 0,
+  powerPercentActive: false,
+  powerPercentPoints: 0,
   powerPoints: 0
 };
 
@@ -686,7 +688,7 @@ function shrink() {
 }
 
 function powerUp() {
-  const powers = ["freeze", "shield", "+10%", "+10sec", "+10,000"];
+  const powers = ["freeze", "shield", "+5%", "+10sec", "+10,000"];
   let index = Math.floor(Math.random() * 5);
   let power = powers[index];
 
@@ -712,8 +714,8 @@ function powerUp() {
       freeze();
     } else if (power === "shield") {
       shield();
-    } else if (power === "+10%") {
-      plusTenPercent();
+    } else if (power === "+5%") {
+      plusFivePercent();
     } else if (power === "+10sec") {
       plusTenSeconds();
     } else if (power === "+10,000") {
@@ -723,19 +725,32 @@ function powerUp() {
 }
 
 function freeze() {
-  console.log("freeze");
 }
 
 function shield() {
-  console.log("shield");
 }
 
-function plusTenPercent() {
-  console.log("plusTenPercent");
+function plusFivePercent() {
+  wordData.powerPercentActive = true
 }
 
 function plusTenSeconds() {
-  console.log("plusTenSeconds");
+  // wordData.seconds += 10
+  // wordData.powerTime = true
+
+  // let powersDiv = document.querySelector(".powers");
+  // const plusTenSecondsSpan = document.getElementsByClassName("+10sec")[0];
+
+  // setTimeout(function() {
+  //   powersDiv.removeChild(plusTenSecondsSpan);
+  // }, 5000);
+}
+
+function powerDown() {
+  const powersDiv = document.querySelector(".powers");
+  powersDiv.innerHTML = "";
+
+  wordData.powerPercentActive = false
 }
 
 function plusTenThousand() {
@@ -790,7 +805,7 @@ function checkWord(word) {
       comboMaxSpan.innerText = comboCount;
       growMax();
     }
-    if (comboCount % 10 === 0) {
+    if (comboCount % 1 === 0) {
       // change to mod 100
       powerUp();
     }
@@ -843,27 +858,31 @@ function clearLine() {
 }
 
 function isTimer(seconds) {
-  let run = false;
+  let growTimer = false;
   let time = seconds;
+  
   // only set timer once
   let one = $("#timer > span")[0].innerHTML;
   if (one == "1:00") {
     let typingTimer = setInterval(() => {
-      run = false;
+      growTimer = false;
+
       if (time <= 0) {
         clearInterval(typingTimer);
       } else {
+
         time -= 1;
+
         let timePad = time < 10 ? "0" + time : time; // zero padded
         let timeRemaining = $("#timer > span")[0];
         $("#timer > span")[0].innerHTML = `0:${timePad}`;
 
-        if (timeRemaining.innerHTML.slice(2, 4) <= 10 && run === false) {
+        if (timeRemaining.innerHTML.slice(2, 4) <= 10 && growTimer === false) {
           timeRemaining.className = "growTimer";
           setTimeout(function() {
             timeRemaining.className = "shrink";
           }, 500);
-          run = true;
+          growTimer = true;
         }
       }
     }, 1000);
@@ -876,14 +895,20 @@ function isTimer(seconds) {
 function calculateWPM(data) {
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  let { seconds, correct, incorrect, total, typed, powerPoints } = data;
+  let { seconds, correct, incorrect, total, typed, powerPercentActive, powerPercentPoints, powerPoints } = data;
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
   let bonus = comboMaxCount * 10;
-  let score = wpm * accuracy * 100 + powerPoints + bonus;
+  let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
   let scoreComma = score.toLocaleString("en");
 
+  if (powerPercentActive) {
+    powerPercentPoints = score / 20
+  }
+
+  console.log(powerPercentPoints)
+  
   if (wpm < 0) {
     wpm = 0;
   } // prevent negative wpm from incorrect words
