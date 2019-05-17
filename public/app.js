@@ -661,7 +661,7 @@ let wordData = {
   shield: false,
   powerPercentActive: false, // when this is true
   powerPercentPoints: 0, // add 5% of score to here
-  powerTime: false, // +10sec glitching
+  powerTime: false, // plus10sec glitching
   powerPoints: 0
 };
 
@@ -691,7 +691,7 @@ function shrink() {
 }
 
 function powerUp() {
-  const powers = ["freeze", "shield", "+5%", "+10sec", "+10,000"];
+  const powers = ["freeze", "shield", "plus5percent", "plus10sec", "plus10000"];
   let index = Math.floor(Math.random() * 5);
   let power = powers[index];
 
@@ -701,15 +701,24 @@ function powerUp() {
   let powerExists = false;
 
   powersSpan.forEach(span => {
-    if (span.className === power) {
+    if (span.className.includes(power)) {
       powerExists = true;
     }
   });
 
   if (powerExists === false) {
     let powerSpan = document.createElement("SPAN");
-    powerSpan.className = power;
-    powerSpan.innerText = power; // replace innerText with innerHTML and use an image
+    powerSpan.className = `${power} fadein`;
+    
+    if (power === "freeze" || power === "shield") {
+      powerSpan.innerHTML = `<img src="${power}.png" alt="${power}" />` 
+    } else if (power === "plus5percent") {
+      powerSpan.innerHTML = "<strong>+5%</strong>"
+    } else if (power === "plus10sec") {
+      powerSpan.innerHTML = "<strong>+10sec</strong>"
+    } else if (power === "plus10000") {
+      powerSpan.innerHTML = "<strong>+10,000</strong>"
+    }
 
     powersDiv.append(powerSpan);
 
@@ -717,22 +726,29 @@ function powerUp() {
       freeze();
     } else if (power === "shield") {
       shield();
-    } else if (power === "+5%") {
+    } else if (power === "plus5percent") {
       plusFivePercent();
-    } else if (power === "+10sec") {
+    } else if (power === "plus10sec") {
       plusTenSeconds();
-    } else if (power === "+10,000") {
+    } else if (power === "plus10000") {
       plusTenThousand();
     }
   }
 }
 
 function freeze() {
+  const freezeSpan = document.querySelector(".freeze")
   wordData.freeze = true
 
   setTimeout(function() {
     wordData.freeze = false
+    freezeSpan.className = "freeze fadeout"
   }, 20000)
+
+  setTimeout(function() {
+    powersDiv.removeChild(freezeSpan);
+  }, 21000)
+
 }
 
 function shield() {
@@ -744,22 +760,22 @@ function plusFivePercent() {
 }
 
 function plusTenSeconds() {
-  // wordData.seconds += 10
-  // wordData.powerTime = true
+  wordData.seconds += 10
+  wordData.powerTime = true
 
-  // let powersDiv = document.querySelector(".powers");
-  // const plusTenSecondsSpan = document.getElementsByClassName("+10sec")[0];
+  let powersDiv = document.querySelector(".powers");
+  const plusTenSecondsSpan = document.getElementsByClassName("plus10sec")[0];
 
-  // setTimeout(function() {
-  //   powersDiv.removeChild(plusTenSecondsSpan);
-  // }, 5000);
+  setTimeout(function() {
+    powersDiv.removeChild(plusTenSecondsSpan);
+  }, 5000);
 }
 
 function plusTenThousand() {
   wordData.powerPoints += 10000
 
   let powersDiv = document.querySelector(".powers");
-  const plusTenThousandSpan = document.getElementsByClassName("+10,000")[0];
+  const plusTenThousandSpan = document.getElementsByClassName("plus10000")[0];
 
   setTimeout(function() {
     powersDiv.removeChild(plusTenThousandSpan);
@@ -768,7 +784,11 @@ function plusTenThousand() {
 
 function powerDown() {
   const powersDiv = document.querySelector(".powers");
-  powersDiv.innerHTML = "";
+  powersDiv.className = "powers fadeout"
+  setTimeout(function() {
+    powersDiv.innerHTML = "";
+    powersDiv.className = "powers"
+  }, 1000)
 
   wordData.freeze = false
   wordData.shield = false
@@ -789,6 +809,8 @@ function checkWord(word) {
   let comboCount = parseInt(comboSpan.innerText);
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
+  const powersDiv = document.querySelector(".powers")
+  const shieldSpan = document.querySelector(".shield")
   let wlen = word.value.length;
   // how much we have of the current word.
   let current = $(".current-word")[0];
@@ -805,6 +827,11 @@ function checkWord(word) {
   } else {
     if (word.value.trim() != currentSubstring && wordData.shield) {
       wordData.shield = false
+      shieldSpan.className = "shield fadeout"
+
+      setTimeout(function() {
+        powersDiv.removeChild(shieldSpan);
+      }, 1000)
     }
     
     current.classList.remove("incorrect-word-bg");
@@ -816,7 +843,6 @@ function checkWord(word) {
       growMax();
     }
     if (comboCount % 1 === 0) {
-      // change to mod 100
       powerUp();
     }
     return true;
@@ -883,7 +909,6 @@ function isTimer(seconds) {
 
         if (wordData.freeze) {
           time -= 0
-          console.log("frozen")
         } else {
           time -= 1;
         }

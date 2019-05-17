@@ -688,3 +688,199 @@ footer a:hover {
   transition: font-size 0.5s ease;
   font-size: 1em;
 }
+
+.powers span img {
+  width: 50px;
+}
+
+.powers span {
+  font-size: 2em;
+  padding: 0em 0.2em 0em 0.2em;
+}
+
+.fadein {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  display: inline-block;
+  animation-name: fadeInBottom;
+}
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeout {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  display: inline-block;
+  animation-name: fadeOutBottom;
+}
+
+@keyframes fadeOutBottom {
+  from {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.plus5percent {
+  -webkit-animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
+  animation: neonPlus5Percent 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neonPlus5Percent {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
+      0 0 80px rgb(254, 25, 25), 0 0 100px rgb(254, 25, 25),
+      0 0 150px rgb(254, 25, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 25, 25), 0 0 35px rgb(254, 25, 25),
+      0 0 40px rgb(254, 25, 25), 0 0 50px rgb(254, 25, 25),
+      0 0 75px rgb(254, 25, 25);
+  }
+}
+
+@-moz-keyframes neonPlus5Percent {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
+      0 0 80px rgb(254, 25, 25), 0 0 100px rgb(254, 25, 25),
+      0 0 150px rgb(254, 25, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 25, 25), 0 0 35px rgb(254, 25, 25),
+      0 0 40px rgb(254, 25, 25), 0 0 50px rgb(254, 25, 25),
+      0 0 75px rgb(254, 25, 25);
+  }
+}
+
+@keyframes neonPlus5Percent {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 25, 25), 0 0 70px rgb(254, 25, 25),
+      0 0 80px rgb(254, 25, 25), 0 0 100px rgb(254, 25, 25),
+      0 0 150px rgb(254, 25, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 25, 25), 0 0 35px rgb(254, 25, 25),
+      0 0 40px rgb(254, 25, 25), 0 0 50px rgb(254, 25, 25),
+      0 0 75px rgb(254, 25, 25);
+  }
+}
+
+.plus10sec {
+  -webkit-animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
+  animation: neonPlus10Sec 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neonPlus10Sec {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
+      0 0 80px rgb(254, 223, 25), 0 0 100px rgb(254, 223, 25),
+      0 0 150px rgb(254, 223, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 223, 25), 0 0 35px rgb(254, 223, 25),
+      0 0 40px rgb(254, 223, 25), 0 0 50px rgb(254, 223, 25),
+      0 0 75px rgb(254, 223, 25);
+  }
+}
+
+@-moz-keyframes neonPlus10Sec {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
+      0 0 80px rgb(254, 223, 25), 0 0 100px rgb(254, 223, 25),
+      0 0 150px rgb(254, 223, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 223, 25), 0 0 35px rgb(254, 223, 25),
+      0 0 40px rgb(254, 223, 25), 0 0 50px rgb(254, 223, 25),
+      0 0 75px rgb(254, 223, 25);
+  }
+}
+
+@keyframes neonPlus10Sec {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgb(254, 223, 25), 0 0 70px rgb(254, 223, 25),
+      0 0 80px rgb(254, 223, 25), 0 0 100px rgb(254, 223, 25),
+      0 0 150px rgb(254, 223, 25);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgb(254, 223, 25), 0 0 35px rgb(254, 223, 25),
+      0 0 40px rgb(254, 223, 25), 0 0 50px rgb(254, 223, 25),
+      0 0 75px rgb(254, 223, 25);
+  }
+}
+
+.plus10000 {
+  -webkit-animation: neonPlus10000 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonPlus10000 1.5s ease-in-out infinite alternate;
+  animation: neonPlus10000 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neonPlus10000 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
+      0 0 80px rgba(25, 181, 254, 1), 0 0 100px rgba(25, 181, 254, 1),
+      0 0 150px rgba(25, 181, 254, 1);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgba(25, 181, 254, 1), 0 0 35px rgba(25, 181, 254, 1),
+      0 0 40px rgba(25, 181, 254, 1), 0 0 50px rgba(25, 181, 254, 1),
+      0 0 75px rgba(25, 181, 254, 1);
+  }
+}
+
+@-moz-keyframes neonPlus10000 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
+      0 0 80px rgba(25, 181, 254, 1), 0 0 100px rgba(25, 181, 254, 1),
+      0 0 150px rgba(25, 181, 254, 1);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgba(25, 181, 254, 1), 0 0 35px rgba(25, 181, 254, 1),
+      0 0 40px rgba(25, 181, 254, 1), 0 0 50px rgba(25, 181, 254, 1),
+      0 0 75px rgba(25, 181, 254, 1);
+  }
+}
+
+@keyframes neonPlus10000 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+      0 0 40px rgba(25, 181, 254, 1), 0 0 70px rgba(25, 181, 254, 1),
+      0 0 80px rgba(25, 181, 254, 1), 0 0 100px rgba(25, 181, 254, 1),
+      0 0 150px rgba(25, 181, 254, 1);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px rgba(25, 181, 254, 1), 0 0 35px rgba(25, 181, 254, 1),
+      0 0 40px rgba(25, 181, 254, 1), 0 0 50px rgba(25, 181, 254, 1),
+      0 0 75px rgba(25, 181, 254, 1);
+  }
+}
