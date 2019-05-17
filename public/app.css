@@ -539,17 +539,35 @@ footer a:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background: #2f4f4f;
-  background-repeat: no-repeat;
+  background: #000000;
+  /* background-repeat: no-repeat;
   background: -webkit-linear-gradient(to left top, blue, red);
   background: -moz-linear-gradient(to left top, blue, red);
   background: -ms-linear-gradient(to left top, blue, red);
   background: -o-linear-gradient(to left top, blue, red);
-  background: linear-gradient(to left top, blue, red);
+  background: linear-gradient(to left top, blue, red); */
 }
 
 .landing-words {
   margin: auto;
+}
+
+#three-container {
+  margin-top: -8em;
+  z-index: -1;
+}
+
+#call-to-action {
+  margin: 0;
+  margin-top: 8em;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  left: 10%;
+  right: 10%;
+  z-index: 2;
 }
 
 .share {
@@ -1027,4 +1045,25 @@ footer a:hover {
 
 .fadeout.plus5000 {
   animation: fadeOutBottom 1s, neonSkyBlue 1.5s ease-in-out infinite alternate;
+}
+
+/*    HOMEPAGE    */
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#instructions {
+  position: absolute;
+  color: #666;
+  bottom: 0;
+  padding-bottom: 6px;
+  font-family: sans-serif;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+#three-container canvas {
+  background-color: transparent;
 }

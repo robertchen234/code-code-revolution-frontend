@@ -4,6 +4,14 @@
     <title>Code Code Revolution!</title>
     <link rel="stylesheet" href="bootstrap.min.css" />
     <link rel="stylesheet" href="app.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/bas.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/TextGeometry.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/FontUtils.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/pnltri.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/droid_sans_bold.typeface.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <!-- <script src="js/pnltri.min.js"></script> -->
     <script src="bundle.js"></script>
     <script src="app.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -19,13 +27,31 @@
       <div class="site-wrapper-inner">
         <div class="panel-landing" id="section-1">
           <div class="landing-words">
-            <h1 class="landing-heading">Code Code Revolution!</h1>
-            <h3>How fast can you code?</h3>
-            <p>
-              <a href="#" class="btn btn-primary btn-lg" id="signup-button">
-                Signup/Login with Blockstack to find out
-              </a>
-            </p>
+            <script>
+              THREE.ShapeUtils.triangulateShape = (function() {
+                var pnlTriangulator = new PNLTRI.Triangulator();
+                return function triangulateShape(contour, holes) {
+                  return pnlTriangulator.triangulate_polygon(
+                    [contour].concat(holes)
+                  );
+                };
+              })();
+            </script>
+
+            <div id="three-container"></div>
+
+            <div id="instructions">
+              click and drag to control the animation
+            </div>
+
+            <div id="call-to-action">
+              <h3>How fast can you type code?</h3>
+              <p>
+                <a href="#" class="btn btn-primary btn-lg" id="signup-button">
+                  Signup/Login with Blockstack to find out
+                </a>
+              </p>
+            </div>
           </div>
           <!-- <p class="lead">
             <a href="#" class="btn btn-primary btn-lg" id="signup-button">
@@ -74,9 +100,7 @@
               <h2 class="combo-combo">
                 <span class="combo-count">0</span> Combo
               </h2>
-              <div class="powers">
-                
-              </div>
+              <div class="powers"></div>
               <h2 class="combo-max">
                 <span class="combo-max-count">0</span> Combo Max
               </h2>
