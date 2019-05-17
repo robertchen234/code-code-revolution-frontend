@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   // HOMEPAGE
-
+  if (!blockstack.isUserSignedIn()) {
   window.onload = init;
 
   function init() {
@@ -404,6 +404,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       e.preventDefault();
     });
   }
+}
 
   document
     .getElementById("signup-button")
