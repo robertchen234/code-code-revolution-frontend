@@ -887,7 +887,7 @@ footer a:hover {
   }
 }
 
-.plus10sec {
+.plus5sec {
   -webkit-animation: neonYellow 1.5s ease-in-out infinite alternate;
   -moz-animation: neonYellow 1.5s ease-in-out infinite alternate;
   animation: neonYellow 1.5s ease-in-out infinite alternate;
@@ -938,7 +938,7 @@ footer a:hover {
   }
 }
 
-.plus10000 {
+.plus5000 {
   -webkit-animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
   -moz-animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
   animation: neonSkyBlue 1.5s ease-in-out infinite alternate;
@@ -1001,11 +1001,11 @@ footer a:hover {
   animation: fadeInBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
 }
 
-.fadein.plus10sec {
+.fadein.plus5sec {
   animation: fadeInBottom 1s, neonYellow 1.5s ease-in-out infinite alternate;
 }
 
-.fadein.plus10000 {
+.fadein.plus5000 {
   animation: fadeInBottom 1s, neonSkyBlue 1.5s ease-in-out infinite alternate;
 }
 
@@ -1021,10 +1021,10 @@ footer a:hover {
   animation: fadeOutBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
 }
 
-.fadeout.plus10sec {
+.fadeout.plus5sec {
   animation: fadeOutBottom 1s, neonYellow 1.5s ease-in-out infinite alternate;
 }
 
-.fadeout.plus10000 {
+.fadeout.plus5000 {
   animation: fadeOutBottom 1s, neonSkyBlue 1.5s ease-in-out infinite alternate;
 }

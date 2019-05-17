@@ -662,7 +662,7 @@ let wordData = {
   shield: false, // when this is true, can block one typo
   powerPercentActive: false, // when this is true
   powerPercentPoints: 0, // add 5% of score to here
-  powerTime: false, // plus10sec glitching
+  powerTime: false, // plus5sec glitching
   powerPoints: 0 // this adds 10,000 points
 };
 
@@ -692,7 +692,7 @@ function shrink() {
 }
 
 function powerUp() {
-  const powers = ["freeze", "shield", "plus5percent", "plus10sec", "plus10000"];
+  const powers = ["freeze", "shield", "plus5percent", "plus5sec", "plus5000"];
   let index = Math.floor(Math.random() * 5);
   let power = powers[index];
 
@@ -710,15 +710,15 @@ function powerUp() {
   if (powerExists === false) {
     let powerSpan = document.createElement("SPAN");
     powerSpan.className = `${power} fadein`;
-    
+
     if (power === "freeze" || power === "shield") {
-      powerSpan.innerHTML = `<img src="${power}.png" alt="${power}" />` 
+      powerSpan.innerHTML = `<img src="${power}.png" alt="${power}" />`;
     } else if (power === "plus5percent") {
-      powerSpan.innerHTML = "<strong>+5%</strong>"
-    } else if (power === "plus10sec") {
-      powerSpan.innerHTML = "<strong>+10sec</strong>"
-    } else if (power === "plus10000") {
-      powerSpan.innerHTML = "<strong>+10,000</strong>"
+      powerSpan.innerHTML = "<strong>+5%</strong>";
+    } else if (power === "plus5sec") {
+      powerSpan.innerHTML = "<strong>+5sec</strong>";
+    } else if (power === "plus5000") {
+      powerSpan.innerHTML = "<strong>+5,000</strong>";
     }
 
     powersDiv.append(powerSpan);
@@ -729,83 +729,82 @@ function powerUp() {
       shield();
     } else if (power === "plus5percent") {
       plusFivePercent();
-    } else if (power === "plus10sec") {
-      plusTenSeconds();
-    } else if (power === "plus10000") {
-      plusTenThousand();
+    } else if (power === "plus5sec") {
+      plusFiveSeconds();
+    } else if (power === "plus5000") {
+      plusFiveThousand();
     }
   }
 }
 
 function freeze() {
-  let powersDiv = document.querySelector(".powers")
-  const freezeSpan = document.querySelector(".freeze")
-  wordData.freeze = true
+  let powersDiv = document.querySelector(".powers");
+  const freezeSpan = document.querySelector(".freeze");
+  wordData.freeze = true;
 
   setTimeout(function() {
-    wordData.freeze = false
-    freezeSpan.className = "freeze fadeout"
-  }, 20000)
+    wordData.freeze = false;
+    freezeSpan.className = "freeze fadeout";
+  }, 10000);
 
   setTimeout(function() {
     powersDiv.removeChild(freezeSpan);
-  }, 21000)
-
+  }, 11000);
 }
 
 function shield() {
-  wordData.shield = true
+  wordData.shield = true;
 }
 
 function plusFivePercent() {
-  wordData.powerPercentActive = true
+  wordData.powerPercentActive = true;
 }
 
-function plusTenSeconds() {
-  wordData.powerTime = true
+function plusFiveSeconds() {
+  wordData.powerTime = true;
 
   let powersDiv = document.querySelector(".powers");
-  const plusTenSecondsSpan = document.getElementsByClassName("plus10sec")[0];
+  const plusFiveSecondsSpan = document.getElementsByClassName("plus5sec")[0];
 
   setTimeout(function() {
-    plusTenThousandSpan.className = "plus10sec fadeout"
-  }, 4000)
+    plusFiveSecondsSpan.className = "plus5sec fadeout";
+  }, 4000);
 
   setTimeout(function() {
-    powersDiv.removeChild(plusTenSecondsSpan);
+    powersDiv.removeChild(plusFiveSecondsSpan);
   }, 5000);
 
   setTimeout(function() {
     wordData.powerTime = false;
-  }, 10000);
+  }, 5000);
 }
 
-function plusTenThousand() {
-  wordData.powerPoints += 10000
+function plusFiveThousand() {
+  wordData.powerPoints += 5000;
 
   let powersDiv = document.querySelector(".powers");
-  const plusTenThousandSpan = document.getElementsByClassName("plus10000")[0];
+  const plusFiveThousandSpan = document.getElementsByClassName("plus5000")[0];
 
   setTimeout(function() {
-    plusTenThousandSpan.className = "plus10000 fadeout"
-  }, 4000)
+    plusFiveThousandSpan.className = "plus5000 fadeout";
+  }, 4000);
 
   setTimeout(function() {
-    powersDiv.removeChild(plusTenThousandSpan);
+    powersDiv.removeChild(plusFiveThousandSpan);
   }, 5000);
 }
 
 function powerDown() {
   const powersDiv = document.querySelector(".powers");
-  powersDiv.className = "powers fadeout"
+  powersDiv.className = "powers fadeout";
   setTimeout(function() {
     powersDiv.innerHTML = "";
-    powersDiv.className = "powers"
-  }, 1000)
+    powersDiv.className = "powers";
+  }, 1000);
 
-  wordData.freeze = false
-  wordData.shield = false
-  wordData.powerPercentActive = false
+  wordData.freeze = false;
+  wordData.shield = false;
+  wordData.powerPercentActive = false;
 }
 
 //////////////////////////////////////////
@@ -822,8 +821,8 @@ function checkWord(word) {
   let comboCount = parseInt(comboSpan.innerText);
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  const powersDiv = document.querySelector(".powers")
-  const shieldSpan = document.querySelector(".shield")
+  const powersDiv = document.querySelector(".powers");
+  const shieldSpan = document.querySelector(".shield");
   let wlen = word.value.length;
   // how much we have of the current word.
   let current = $(".current-word")[0];
@@ -839,14 +838,15 @@ function checkWord(word) {
     return false;
   } else {
     if (word.value.trim() != currentSubstring && wordData.shield) {
-      wordData.shield = false
-      shieldSpan.className = "shield fadeout"
+      word.value = currentSubstring
+      wordData.shield = false;
+      shieldSpan.className = "shield fadeout";
 
       setTimeout(function() {
         powersDiv.removeChild(shieldSpan);
-      }, 1000)
+      }, 1000);
     }
-    
+
     current.classList.remove("incorrect-word-bg");
     comboCount += 1;
     comboSpan.innerText = comboCount;
@@ -855,7 +855,7 @@ function checkWord(word) {
       comboMaxSpan.innerText = comboCount;
       growMax();
     }
-    if (comboCount % 50 === 0) {
+    if (comboCount % 20 === 0) {
       powerUp();
     }
     return true;
@@ -909,7 +909,7 @@ function clearLine() {
 function isTimer(seconds) {
   let growTimer = false;
   let time = seconds;
-  
+
   // only set timer once
   let one = $("#timer > span")[0].innerHTML;
   if (one == "1:00") {
@@ -919,10 +919,9 @@ function isTimer(seconds) {
       if (time <= 0) {
         clearInterval(typingTimer);
       } else {
-
         if (wordData.freeze || wordData.powerTime) {
-          time -= 0
-          wordData.freezeTime += 1
+          time -= 0;
+          wordData.freezeTime += 1;
         } else {
           time -= 1;
         }
@@ -949,8 +948,18 @@ function isTimer(seconds) {
 function calculateWPM(data) {
   let comboMaxSpan = document.querySelector(".combo-max-count");
   let comboMaxCount = parseInt(comboMaxSpan.innerText);
-  let { seconds, correct, incorrect, total, typed, freezeTime, powerPercentActive, powerPercentPoints, powerPoints } = data;
-  seconds += freezeTime
+  let {
+    seconds,
+    correct,
+    incorrect,
+    total,
+    typed,
+    freezeTime,
+    powerPercentActive,
+    powerPercentPoints,
+    powerPoints
+  } = data;
+  seconds += freezeTime;
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
@@ -959,9 +968,9 @@ function calculateWPM(data) {
   let scoreComma = score.toLocaleString("en");
 
   if (powerPercentActive) {
-    powerPercentPoints = score / 20
+    powerPercentPoints = score / 20;
   }
-  
+
   if (wpm < 0) {
     wpm = 0;
   } // prevent negative wpm from incorrect words
@@ -989,13 +998,23 @@ var displayWPM = (function(data) {
 
       let comboMaxSpan = document.querySelector(".combo-max-count");
       let comboMaxCount = parseInt(comboMaxSpan.innerText);
-      let { seconds, correct, incorrect, total, typed, freezeTime, powerPercentPoints, powerPoints } = data;
+      let {
+        seconds,
+        correct,
+        incorrect,
+        total,
+        typed,
+        freezeTime,
+        powerPercentPoints,
+        powerPoints
+      } = data;
       seconds += freezeTime;
       let min = seconds / 60;
       let wpm = Math.ceil(typed / 5 - incorrect / min);
       let accuracy = Math.ceil((correct / total) * 100);
       let bonus = comboMaxCount * 10;
-      let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
+      let score =
+        wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
       let scoreComma = score.toLocaleString("en");
 
       if (wpm < 0) {
@@ -1085,7 +1104,7 @@ var showSubmitName = (function() {
       let typeBox = document.querySelector("#typebox");
       let timer = document.querySelector("#timer");
       let comboSpan = document.querySelector(".combo-combo");
-      let powers = document.querySelector(".powers")
+      let powers = document.querySelector(".powers");
       let nameForm = document.createElement("FORM");
 
       // hide previous input box and timer
@@ -1163,24 +1182,30 @@ function postUser() {
 }
 
 function postScore(user) {
-  let userId = user.id;
-  let wpm = parseInt(document.querySelector(".wpm-value").innerText);
-  let accuracy = parseInt(document.querySelectorAll(".wpm-value")[1].innerText);
-  let score = wpm * accuracy * 100;
-  let total_words = parseInt(
-    document.querySelectorAll("#results-stats span")[0].innerText
-  );
-  let correct_words = parseInt(
-    document.querySelectorAll("#results-stats span")[1].innerText
-  );
-  let incorrect_words = parseInt(
-    document.querySelectorAll("#results-stats span")[2].innerText
-  );
-  let characters_typed = parseInt(
-    document.querySelectorAll("#results-stats span")[3].innerText
-  );
-
+  let comboMaxSpan = document.querySelector(".combo-max-count");
+  let comboMaxCount = parseInt(comboMaxSpan.innerText);
+  let {
+    seconds,
+    correct,
+    incorrect,
+    total,
+    typed,
+    freezeTime,
+    powerPercentPoints,
+    powerPoints
+  } = wordData;
+  seconds += freezeTime;
+  let min = seconds / 60;
+  let wpm = Math.ceil(typed / 5 - incorrect / min);
+  let accuracy = Math.ceil((correct / total) * 100);
+  let bonus = comboMaxCount * 10;
+  let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
+  let total_words = total;
+  let correct_words = correct;
+  let incorrect_words = incorrect;
+  let characters_typed = typed;
   let ccr = document.querySelector("#ccr");
+  let userId = user.id;
   ccr.dataset.id = userId;
 
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/scores", {
