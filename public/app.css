@@ -623,10 +623,20 @@ footer a:hover {
 
 .compliment {
   font-size: 0em;
+  /* -webkit-transition: font-size 1s ease;
+  -moz-transition: font-size 1s ease;
+  -o-transition: font-size 1s ease;
+  transition: font-size 1s ease; */
 }
 
 .compliment.grow {
   font-size: 0.9em;
+}
+
+.compliment.grow.miss {
+  -webkit-animation: neonRed 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonRed 1.5s ease-in-out infinite alternate;
+  animation: neonRed 1.5s ease-in-out infinite alternate;
 }
 
 .grow {

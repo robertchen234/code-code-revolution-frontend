@@ -1111,6 +1111,16 @@ function complimentGrow() {
   }, 500);
 }
 
+function missGrow() {
+  let complimentSpan = document.querySelector(".compliment");
+  complimentSpan.className = "compliment grow miss";
+  complimentSpan.innerText = "Miss";
+
+  setTimeout(function() {
+    complimentSpan.className = "compliment";
+  }, 500);
+}
+
 function growMax() {
   let comboMaxH2 = document.querySelector(".combo-max");
   comboMaxH2.className = "combo-max grow";
@@ -1308,12 +1318,12 @@ function submitWord(word) {
     current.classList.remove("current-word");
     current.classList.add("correct-word-c");
     wordData.correct += 1;
-
     complimentGrow();
   } else {
     current.classList.remove("current-word", "incorrect-word-bg");
     current.classList.add("incorrect-word-c");
     wordData.incorrect += 1;
+    missGrow();
   }
 
   // update wordData
