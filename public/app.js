@@ -657,8 +657,11 @@ let wordData = {
   incorrect: 0,
   total: 0,
   typed: 0,
-  powerPercentActive: false,
-  powerPercentPoints: 0,
+  freeze: false,
+  shield: false,
+  powerPercentActive: false, // when this is true
+  powerPercentPoints: 0, // add 5% of score to here
+  powerTime: false, // +10sec glitching
   powerPoints: 0
 };
 
@@ -725,6 +728,11 @@ function powerUp() {
 }
 
 function freeze() {
+  wordData.freeze = true
+
+  setTimeout(function() {
+    wordData.freeze = false
+  }, 20000)
 }
 
 function shield() {
@@ -746,13 +754,6 @@ function plusTenSeconds() {
   // }, 5000);
 }
 
-function powerDown() {
-  const powersDiv = document.querySelector(".powers");
-  powersDiv.innerHTML = "";
-
-  wordData.powerPercentActive = false
-}
-
 function plusTenThousand() {
   wordData.powerPoints += 10000
 
@@ -767,6 +768,10 @@ function plusTenThousand() {
 function powerDown() {
   const powersDiv = document.querySelector(".powers");
   powersDiv.innerHTML = "";
+
+  wordData.freeze = false
+  wordData.shield = false
+  wordData.powerPercentActive = false
 }
 
 //////////////////////////////////////////
@@ -871,7 +876,12 @@ function isTimer(seconds) {
         clearInterval(typingTimer);
       } else {
 
-        time -= 1;
+        if (wordData.freeze) {
+          time -= 0
+          console.log("frozen")
+        } else {
+          time -= 1;
+        }
 
         let timePad = time < 10 ? "0" + time : time; // zero padded
         let timeRemaining = $("#timer > span")[0];
@@ -906,8 +916,6 @@ function calculateWPM(data) {
   if (powerPercentActive) {
     powerPercentPoints = score / 20
   }
-
-  console.log(powerPercentPoints)
   
   if (wpm < 0) {
     wpm = 0;
