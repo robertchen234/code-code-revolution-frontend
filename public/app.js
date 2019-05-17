@@ -855,7 +855,7 @@ function checkWord(word) {
       comboMaxSpan.innerText = comboCount;
       growMax();
     }
-    if (comboCount % 2 === 0) {
+    if (comboCount % 50 === 0) {
       powerUp();
     }
     return true;
