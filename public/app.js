@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+  // SOUNDCLOUD
+  let bgMusic = new Audio("bg-music.mp3");
+  bgMusic.volume = 0.3;
+  bgMusic.play();
+
   // HOMEPAGE
   if (!blockstack.isUserSignedIn()) {
     window.onload = init;
@@ -1081,7 +1086,11 @@ let wordData = {
 
 function grow() {
   let comboH2 = document.querySelector(".combo-combo");
+  let hit = new Audio("hit.flac");
+
   comboH2.className = "combo-combo grow";
+  hit.volume = 0.2
+  hit.play();
 
   setTimeout(function() {
     comboH2.className = "combo-combo";
@@ -1093,19 +1102,46 @@ function complimentGrow() {
     "Good!",
     "Great!",
     "Wow!",
-    "Amazing!!",
+    "Amazing!",
+    "Awesome!!",
+    "Monster!!",
     "Super!!",
     "Dope!!",
+    "Hyper!!",
+    "King!!",
+    "Killer!!",
+    "Ultra!!!",
     "Godlike!!!",
     "Perfect!!!",
     "Incredible!!!"
   ];
-  let index = Math.floor(Math.random() * 9);
+  let index = Math.floor(Math.random() * 15);
   let compliment = compliments[index];
 
   let complimentSpan = document.querySelector(".compliment");
   complimentSpan.className = "compliment grow";
   complimentSpan.innerText = compliment;
+
+  let killer = new Audio("killer.mp3");
+  let hyper = new Audio("hyper.mp3");
+  let ultra = new Audio("ultra.mp3");
+  let monster = new Audio("monster.mp3");
+  let awesome = new Audio("awesome.mp3");
+  let king = new Audio("king.mp3");
+
+  if (compliment === "Killer!!") {
+    killer.play();
+  } else if (compliment === "Hyper!!") {
+    hyper.play();
+  } else if (compliment === "Ultra!!!") {
+    ultra.play();
+  } else if (compliment === "Monster!!") {
+    monster.play();
+  } else if (compliment === "Awesome!!") {
+    awesome.play();
+  } else if (compliment === "King!!") {
+    king.play();
+  }
 
   setTimeout(function() {
     complimentSpan.className = "compliment";
@@ -1116,6 +1152,8 @@ function missGrow() {
   let complimentSpan = document.querySelector(".compliment");
   complimentSpan.className = "compliment grow miss";
   complimentSpan.innerText = "Miss";
+  let miss = new Audio("miss.mp3");
+  miss.play();
 
   setTimeout(function() {
     complimentSpan.className = "compliment";
