@@ -429,19 +429,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
       blockstack.signUserOut(window.location.href);
     });
 
-  getUsersInterval();
+  getUsers(); // poke Heroku to start waking backend up
+
+  setTimeout(() => {
+    getUsersInterval();
+  }, 2000); // give Heroku 2 seconds to wake up
+
+  function getUsers() {
+    fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
+      .then(res => res.json())
+      .then(data => (users = data));
+  }
 
   function getUsersInterval() {
     let users = [];
     const interval = setInterval(() => {
-      users.length < 1
-        ? fetch(
-            "https://code-code-revolution-backend.herokuapp.com/api/v1/users"
-          )
-            .then(res => res.json())
-            .then(data => (users = data))
-        : clearInterval(interval);
-    }, 2000);
+      users.length < 1 ? getUsers() : clearInterval(interval);
+    }, 1000); // fetch data every 1 second until it arrives
 
     return users.length < 1 ? interval : clearInterval(interval);
   }
@@ -1089,7 +1093,7 @@ function grow() {
   let hit = new Audio("hit.flac");
 
   comboH2.className = "combo-combo grow";
-  hit.volume = 0.2
+  hit.volume = 0.2;
   hit.play();
 
   setTimeout(function() {
