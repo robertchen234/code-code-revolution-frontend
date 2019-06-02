@@ -10,7 +10,8 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 body {
-  /* color: #fff; */
+  margin: 0;
+  overflow: hidden;
   text-align: center;
 }
 .hide {
@@ -127,6 +128,10 @@ body {
 #word-section {
   border: 1px solid #999;
   background-color: #fff;
+}
+
+#word-section span {
+  padding: 0em 0.35em 0em 0.35em;
 }
 
 /************************************************/
@@ -445,43 +450,6 @@ footer a:hover {
   z-index: -99;
   background-color: black;
   opacity: 0.5;
-
-  canvas {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  input {
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    right: 0;
-    outline: none;
-    background-color: rgba(38, 50, 56, 0);
-    color: #000;
-    border: none;
-    width: 50%;
-    min-width: 500px;
-    max-width: 100%;
-    margin: auto;
-    height: 60px;
-    line-height: 60px;
-    font-size: 40px;
-    padding: 0 20px;
-
-    &:hover,
-    &:focus {
-      border: 1px solid rgba(38, 50, 56, 0);
-    }
-
-    &::-webkit-input-placeholder {
-      color: rgba(#ffffff, 0);
-    }
-  }
 }
 
 #input {
@@ -540,12 +508,6 @@ footer a:hover {
   -o-background-size: cover;
   background-size: cover;
   background: #000000;
-  /* background-repeat: no-repeat;
-  background: -webkit-linear-gradient(to left top, blue, red);
-  background: -moz-linear-gradient(to left top, blue, red);
-  background: -ms-linear-gradient(to left top, blue, red);
-  background: -o-linear-gradient(to left top, blue, red);
-  background: linear-gradient(to left top, blue, red); */
 }
 
 .landing-words {
@@ -623,10 +585,6 @@ footer a:hover {
 
 .compliment {
   font-size: 0em;
-  /* -webkit-transition: font-size 1s ease;
-  -moz-transition: font-size 1s ease;
-  -o-transition: font-size 1s ease;
-  transition: font-size 1s ease; */
 }
 
 .compliment.grow {
@@ -701,110 +659,6 @@ footer a:hover {
     opacity: 0;
   }
 }
-
-/* .freeze {
-  border-radius: 50%;
-  -webkit-animation: neonWhite 1.5s ease-in-out infinite alternate;
-  -moz-animation: neonWhite 1.5s ease-in-out infinite alternate;
-  animation: neonWhite 1.5s ease-in-out infinite alternate;
-}
-
-@-webkit-keyframes neonWhite {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px white, 0 0 70px white,
-      0 0 80px white, 0 0 100px white,
-      0 0 150px white;
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px white, 0 0 35px white,
-      0 0 40px white, 0 0 50px white,
-      0 0 75px white;
-  }
-}
-
-@-moz-keyframes neonWhite {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px white, 0 0 70px white,
-      0 0 80px white, 0 0 100px white,
-      0 0 150px white;
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px white, 0 0 35px white,
-      0 0 40px white, 0 0 50px white,
-      0 0 75px white;
-  }
-}
-
-@keyframes neonWhite {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px white, 0 0 70px white,
-      0 0 80px white, 0 0 100px white,
-      0 0 150px white;
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px white, 0 0 35px white,
-      0 0 40px white, 0 0 50px white,
-      0 0 75px white;
-  }
-}
-
-.shield {
-  border-radius: 50%;
-  -webkit-animation: neonTeal 1.5s ease-in-out infinite alternate;
-  -moz-animation: neonTeal 1.5s ease-in-out infinite alternate;
-  animation: neonTeal 1.5s ease-in-out infinite alternate;
-}
-
-@-webkit-keyframes neonTeal {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
-      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
-      0 0 150px rgb(25, 254, 193);
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
-      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
-      0 0 75px rgb(25, 254, 193);
-  }
-}
-
-@-moz-keyframes neonTeal {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
-      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
-      0 0 150px rgb(25, 254, 193);
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
-      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
-      0 0 75px rgb(25, 254, 193);
-  }
-}
-
-@keyframes neonTeal {
-  from {
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-      0 0 40px rgb(25, 254, 193), 0 0 70px rgb(25, 254, 193),
-      0 0 80px rgb(25, 254, 193), 0 0 100px rgb(25, 254, 193),
-      0 0 150px rgb(25, 254, 193);
-  }
-  to {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-      0 0 20px rgb(25, 254, 193), 0 0 35px rgb(25, 254, 193),
-      0 0 40px rgb(25, 254, 193), 0 0 50px rgb(25, 254, 193),
-      0 0 75px rgb(25, 254, 193);
-  }
-} */
 
 .plus5percent {
   -webkit-animation: neonRed 1.5s ease-in-out infinite alternate;
@@ -935,14 +789,6 @@ footer a:hover {
   }
 }
 
-/* .fadein.freeze {
-  animation: fadeInBottom 1s, neonWhite 1.5s ease-in-out infinite alternate
-}
-
-.fadein.shield {
-  animation: fadeInBottom 1s, neonTeal 1.5s ease-in-out infinite alternate
-} */
-
 .fadein.plus5percent {
   animation: fadeInBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
 }
@@ -955,14 +801,6 @@ footer a:hover {
   animation: fadeInBottom 1s, neonBlue 1.5s ease-in-out infinite alternate;
 }
 
-/* .fadeout.freeze {
-  animation: fadeOutBottom 1s, neonWhite 1.5s ease-in-out infinite alternate
-}
-
-.fadeout.shield {
-  animation: fadeOutBottom 1s, neonTeal 1.5s ease-in-out infinite alternate
-} */
-
 .fadeout.plus5percent {
   animation: fadeOutBottom 1s, neonRed 1.5s ease-in-out infinite alternate;
 }
@@ -973,25 +811,4 @@ footer a:hover {
 
 .fadeout.plus5000 {
   animation: fadeOutBottom 1s, neonBlue 1.5s ease-in-out infinite alternate;
-}
-
-/*    HOMEPAGE    */
-body {
-  margin: 0;
-  overflow: hidden;
-}
-
-#instructions {
-  position: absolute;
-  color: #666;
-  bottom: 0;
-  padding-bottom: 6px;
-  font-family: sans-serif;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-#three-container canvas {
-  background-color: transparent;
 }
