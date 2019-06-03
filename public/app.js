@@ -1034,7 +1034,7 @@ function calculateWPM(data) {
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
-  let bonus = comboMaxCount * 10;
+  let bonus = comboMaxCount * 100;
   let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
   let scoreComma = score.toLocaleString("en");
 
@@ -1083,7 +1083,7 @@ var displayWPM = (function(data) {
       let min = seconds / 60;
       let wpm = Math.ceil(typed / 5 - incorrect / min);
       let accuracy = Math.ceil((correct / total) * 100);
-      let bonus = comboMaxCount * 10;
+      let bonus = comboMaxCount * 100;
       let score =
         wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
       let scoreComma = score.toLocaleString("en");
@@ -1200,12 +1200,12 @@ var showSubmitName = (function() {
       
       typeSection.prepend(nameForm);
 
-      nameForm.addEventListener("submit", e => preventFormReload(e, comboMaxCount));
+      nameForm.addEventListener("submit", e => signedInOrOut(e, comboMaxCount));
     }
   };
 })();
 
-function preventFormReload(e, comboMaxCount) {
+function signedInOrOut(e, comboMaxCount) {
   e.preventDefault();
 
   if (blockstack.isUserSignedIn()) {
@@ -1215,9 +1215,9 @@ function preventFormReload(e, comboMaxCount) {
   }
 }
 
-var findUser = (function(comboMaxCount) {
+var findUser = (function() {
   var executed = false;
-  return function() {
+  return function(comboMaxCount) {
     if (!executed) {
       executed = true;
 
@@ -1236,7 +1236,7 @@ function iterateUsers(users, comboMaxCount) {
   let names = [];
   users.forEach(user => {
     if (nameBox.value === user.name) {
-      postScore(user);
+      postScore(user, comboMaxCount);
       names.push(user.name);
     }
   });
@@ -1282,7 +1282,7 @@ function postScore(user, comboMaxCount) {
   let min = seconds / 60;
   let wpm = Math.ceil(typed / 5 - incorrect / min);
   let accuracy = Math.ceil((correct / total) * 100);
-  let bonus = comboMaxCount * 10;
+  let bonus = comboMaxCount * 100;
   let score = wpm * accuracy * 100 + powerPercentPoints + powerPoints + bonus;
   let total_words = total;
   let correct_words = correct;
@@ -1291,6 +1291,25 @@ function postScore(user, comboMaxCount) {
   let ccr = document.querySelector("#ccr");
   let userId = user.id;
   ccr.dataset.id = userId;
+  // scores = { scores: [] }
+
+  // let options = { encrypt: false }
+
+  // blockstack.getFile("scores.json", options).then(data => {
+  //   if (data) {
+  //     console.log("got it", data)
+  //     scores = JSON.parse(data)
+  //   } else {
+  //     console.log("empty")
+  //     scores = { scores: [] }
+  //   }
+  // })
+
+  // console.log(score)
+
+  // scores.scores.push(score)
+  
+  // blockstack.putFile("scores.json", JSON.stringify(scores), options).then(data => console.log(data))
 
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/scores", {
     method: "POST",
@@ -1312,6 +1331,7 @@ function postScore(user, comboMaxCount) {
 }
 
 function getScores() {
+
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/scores")
     .then(data => data.json())
     .then(scores => sortScores(scores));
