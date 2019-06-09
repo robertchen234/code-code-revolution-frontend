@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   getUsers(); // poke Heroku to start waking backend up
 
-  setTimeout(() => {
-    getUsersInterval();
-  }, 2000); // give Heroku 2 seconds to wake up
+  // setTimeout(() => {
+  //   getUsersInterval();
+  // }, 2000); // give Heroku 2 seconds to wake up
 
   function getUsers() { 
     fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
@@ -28,20 +28,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .then(data => (users = data));
   }
 
-  function getUsersInterval() {
-    let users = [];
-    const interval = setInterval(() => {
-      if (users.length < 1) {
-        fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
-        .then(res => res.json())
-        .then(data => (users = data));
-      } else {
-        clearInterval(interval);
-      } 
-    }, 1000); // fetch data every 1 second until data arrives
+  // function getUsersInterval() {
+  //   let users = [];
+  //   const interval = setInterval(() => {
+  //     if (users.length < 1) {
+  //       fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
+  //       .then(res => res.json())
+  //       .then(data => (users = data));
+  //     } else {
+  //       clearInterval(interval);
+  //     } 
+  //   }, 1000); // fetch data every 1 second until data arrives
 
-    return users.length < 1 ? interval : clearInterval(interval);
-  }
+  //   return users.length < 1 ? interval : clearInterval(interval);
+  // }
 
   function showProfile(profile) {
     var person = new blockstack.Person(profile);
