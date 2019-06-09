@@ -1252,11 +1252,11 @@ function iterateUsers(users, comboMaxCount) {
 function checkNames(users, names, comboMaxCount) {
   let nameBox = document.querySelector("#namebox");
   if (!names.includes(nameBox.value)) {
-    postUser(comboMaxCount);
+    postUser(comboMaxCount, users);
   }
 }
 
-function postUser(comboMaxCount) {
+function postUser(comboMaxCount, users) {
   let nameBox = document.querySelector("#namebox");
 
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users", {
@@ -1270,10 +1270,10 @@ function postUser(comboMaxCount) {
     })
   })
     .then(data => data.json())
-    .then(user => postScore(user, comboMaxCount));
+    .then(user => postScore(user, comboMaxCount, users));
 }
 
-function postScore(user, comboMaxCount) {
+function postScore(user, comboMaxCount,users) {
   let {
     seconds,
     correct,
@@ -1333,17 +1333,17 @@ function postScore(user, comboMaxCount) {
       incorrect_words: incorrect_words,
       characters_typed: characters_typed
     })
-  }).then(getScores);
+  }).then(getScores(users));
 }
 
-function getScores() {
+function getScores(users) {
 
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/scores")
     .then(data => data.json())
-    .then(scores => sortScores(scores));
+    .then(scores => sortScores(scores,users));
 }
 
-function sortScores(scores) {
+function sortScores(scores,users) {
   let scoresArray = [];
   scores.forEach(score => {
     scoresArray.push(({ user, score } = score));
@@ -1365,11 +1365,11 @@ function sortScores(scores) {
     }
   }
 
-  showLeaderBoard();
+  showLeaderBoard(users);
   showScores(scoresArrayDistinct);
 }
 
-function showLeaderBoard() {
+function showLeaderBoard(users) {
   const ccr = document.querySelector("#ccr");
   const typeSection = document.querySelector("#type-section");
   const wordSection = document.querySelector("#word-section");
@@ -1383,7 +1383,7 @@ function showLeaderBoard() {
   leaderBoard.id = "leaderboard";
   typeSection.prepend(leaderBoard);
 
-  getComments();
+  getComments(users);
 }
 
 function showScores(scoresArrayDistinct) {
@@ -1398,13 +1398,13 @@ function showScores(scoresArrayDistinct) {
   });
 }
 
-function getComments() {
+function getComments(users) {
   fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/comments")
     .then(data => data.json())
-    .then(comments => loadComments(comments));
+    .then(comments => loadComments(comments,users));
 }
 
-function loadComments(comments) {
+function loadComments(comments,users) {
   const typeSection = document.querySelector("#type-section");
 
   const commentSection = document.createElement("DIV");
@@ -1415,12 +1415,12 @@ function loadComments(comments) {
   commentUl.id = "comment-ul";
   commentSection.append(commentUl);
 
-  comments.forEach(comment => appendComment(comment));
+  comments.forEach(comment => appendComment(comment, users));
 
   showSubmitComment();
 }
 
-function appendComment(comment) {
+function appendComment(comment,users) {
   let commentUl = document.querySelector("#comment-ul");
 
   let commentLi = document.createElement("LI");
@@ -1432,13 +1432,7 @@ function appendComment(comment) {
   }</span></strong>: <span class="content">${comment.content}</span>`;
   commentUl.append(commentLi);
 
-  getUsersForNames();
-}
-
-function getUsersForNames() {
-  fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
-    .then(data => data.json())
-    .then(users => matchIdsWithNames(users));
+  matchIdsWithNames(users)
 }
 
 function matchIdsWithNames(users) {
