@@ -22,17 +22,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
     getUsersInterval();
   }, 2000); // give Heroku 2 seconds to wake up
 
-  function getUsers() {
+  function getUsers() { 
     fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
-      .then(res => res.json())
-      .then(data => (users = data));
+        .then(res => res.json())
+        .then(data => (users = data));
   }
 
   function getUsersInterval() {
     let users = [];
     const interval = setInterval(() => {
-      users.length < 1 ? getUsers() : clearInterval(interval);
-    }, 1000); // fetch data every 1 second until it arrives
+      if (users.length < 1) {
+        fetch("https://code-code-revolution-backend.herokuapp.com/api/v1/users")
+        .then(res => res.json())
+        .then(data => (users = data));
+      } else {
+        clearInterval(interval);
+      } 
+    }, 1000); // fetch data every 1 second until data arrives
 
     return users.length < 1 ? interval : clearInterval(interval);
   }
@@ -1319,7 +1325,7 @@ function postScore(user, comboMaxCount) {
     },
     body: JSON.stringify({
       user_id: userId,
-      score: score,
+      score: score ? score : 0,
       wpm: wpm,
       accuracy: accuracy,
       total_words: total_words,
