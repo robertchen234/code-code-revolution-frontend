@@ -1201,7 +1201,7 @@ var showSubmitName = (function() {
         nameForm.innerHTML = `<input id='namebox' name='namebox' type='text' tabindex='1' value=${person} placeholder='Your name'><input id="submit-name" type='submit' value='Submit Score'>`;
       } else {
         nameForm.innerHTML =
-        "<input id='namebox' name='namebox' type='text' tabindex='1' value='Guest' placeholder='Your name'><input id='submit-name' type='submit' value='Blockstack Submit Score'>";
+        "<input id='namebox' name='namebox' type='text' tabindex='1' value='Guest' placeholder='Your name'><input id='submit-name' type='submit' value='Compete w/ Blockstack'>";
       }
       
       typeSection.prepend(nameForm);
